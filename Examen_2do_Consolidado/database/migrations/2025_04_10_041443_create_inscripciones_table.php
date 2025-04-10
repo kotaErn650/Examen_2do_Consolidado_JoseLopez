@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('inscripciones', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('estudiante_id')->constrained('estudiantes')->onDelete('cascade');
+            $table->foreignId('curso_id')->constrained('cursos')->onDelete('cascade');
+            $table->date('fecha_inscripcion');
             $table->timestamps();
+
+            $table -> unique (['estudiante_id','cursos_ide']); //evito que la inscripcion sea doble
         });
     }
 
