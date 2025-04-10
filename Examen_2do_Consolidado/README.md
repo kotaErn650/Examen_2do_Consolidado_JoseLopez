@@ -26,9 +26,9 @@ la cual Gestionara la informacion de estudiantes, cursos e Inscripcones
 
 2) realizar l0s respectivos Contrioladores ( par caa una de las tablas)
 
-3) crear los MIDELS da cada uno 
+3) crear los MODELS da cada uno 
 
-4) ealizar los VIEWS 
+4) Realizar los VIEWS con sus rspectivos achivos (VIStA)
 
 5) Implement Herramientas BootsTrap paaara agilizar el proceso de Eslilos E interfaces Graficas
 
