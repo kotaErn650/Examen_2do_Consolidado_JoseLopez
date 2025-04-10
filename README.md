@@ -14,13 +14,13 @@ la cual Gestionara la informacion de estudiantes, cursos e Inscripcones
     *Cursos (Entidad Fuerte)
         id (PK)
         nombre
-        descripción
-        duración
-    *Inscripciones (Entidad Débil - Relaciona Estudiantes y Cursos)
+        descripcion
+        duracion
+    *Inscripciones (Entidad Debil - Relaciona Estudiantes y Cursos)
         id (PK)
         estudiante_id (FK)
         curso_id (FK)
-        fecha_inscripción
+        fecha_inscripcion
 
 
 
