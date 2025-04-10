@@ -33,3 +33,4 @@ la cual Gestionara la informacion de estudiantes, cursos e Inscripcones
 5) Implement Herramientas BootsTrap paaara agilizar el proceso de Eslilos E interfaces Graficas
 
 6) implemetar Contrtolador de verciones GITHub
+
