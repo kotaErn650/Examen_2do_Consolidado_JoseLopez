@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha_inscripcion');
             $table->timestamps();
 
-            $table -> unique (['estudiante_id','cursos_ide']); //evito que la inscripcion sea doble
+            $table -> unique (['estudiante_id','curso_id']); //evito que la inscripcion sea doble
         });
     }
 
