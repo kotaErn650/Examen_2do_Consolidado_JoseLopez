@@ -11,7 +11,7 @@ class Curso extends Model
 
     protected $fillable =['nombre','descripcion','duracion'];
 
-    public function estudiante ()
+    public function estudiantes ()
     {
         return $this->belongsToMany(Estudiante::class, 'inscripciones')
                     ->withPivot('fecha_inscripcion')

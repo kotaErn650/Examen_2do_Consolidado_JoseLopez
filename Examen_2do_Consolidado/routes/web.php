@@ -6,6 +6,7 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\InscripcionController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });

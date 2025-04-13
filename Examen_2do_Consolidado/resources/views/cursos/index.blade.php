@@ -77,7 +77,7 @@
                                         <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger size-min m1">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>
