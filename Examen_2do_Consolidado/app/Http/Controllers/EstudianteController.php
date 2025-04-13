@@ -113,7 +113,7 @@ class EstudianteController extends Controller
 
     public function showCursos(Estudiante $estudiante)
     {
-        $cursos = $estudiante->cursos()->paginate(10);
+        $cursos = $estudiante->cursos()->get();
         return view('estudiantes.cursos', compact('estudiante', 'cursos'));
     }
 

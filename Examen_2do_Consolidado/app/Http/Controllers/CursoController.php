@@ -109,7 +109,7 @@ class CursoController extends Controller
 
     public function ShowEstudiantes(Curso $curso)
     {
-        $estudiantes + $curso->estudiantes()->paginate(10);
+        $estudiantes + $curso->estudiantes()->get();
         return view('cursos.estudiantes', compact('curso', 'estudiantes'));
     }
 }
