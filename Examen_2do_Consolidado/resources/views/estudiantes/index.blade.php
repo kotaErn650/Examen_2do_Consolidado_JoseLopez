@@ -86,11 +86,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <a href="{{ route('estudiantes.edit', $estudiante->id) }}" class="btn btn-warning">🖋️Editar</a>
                                         <a href="{{ route('estudiantes.cursos', $estudiante->id) }}" class="btn btn-info text-red-600 hover:text-green-900 mr-2"> 📒Cursos</a>
-                                        <form action="{{ route('estudiantes.destroy', $estudiante->id) }}" method="POST" class="inline">
+                                        <form action="{{ route('estudiantes.destroy', $estudiante->id) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este estudiante?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger text-black hover:text-yellow-900">Eliminar</button>
                                         </form>
+
                                     </td>
                                 </tr>
                                 @endforeach
