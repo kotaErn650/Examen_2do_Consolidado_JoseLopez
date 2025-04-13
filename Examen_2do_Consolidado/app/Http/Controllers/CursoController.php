@@ -62,6 +62,7 @@ class CursoController extends Controller
      */
     public function show(Curso $curso)
     {
+       
         return view('cursos.show', compact('curso'));
     }
 

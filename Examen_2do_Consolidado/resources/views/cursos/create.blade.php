@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👩🏻‍🎓Estudiantes </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid justify-content-start">
+                <a href="{{ route('dashboard') }}" class="btn btn-info  me-2">◀️Return to DASHBOARD</a>
+                
+                <a href="{{ route('inscripciones.index') }}" class="btn btn-info me-2">Ir a Inscripciones</a>
+                <a href="{{ route('estudiantes.index') }}" class="btn btn-info me-2">Ir a Estudiantes</a>     
+        </div>
+    </nav>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -28,10 +48,10 @@
                         </div>
 
                         <div class="flex items-center justify-between">
-                            <button type="submit" class="btn btn-primary hover:bg-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            <button type="submit" class="btn btn-info text-blue-600 hover:text-blue-900 mr-2">
                                 Guardar
                             </button>
-                            <a href="{{ route('cursos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            <a href="{{ route('cursos.index') }}" class="bg-gray-500 hover:bg-gray-700 text-b font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                 Cancelar
                             </a>
                         </div>
@@ -41,3 +61,7 @@
         </div>
     </div>
 </x-app-layout>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
