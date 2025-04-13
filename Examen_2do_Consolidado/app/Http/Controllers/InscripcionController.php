@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InscripcionRequest;
 use Illuminate\Http\Request;
 use App\Models\Inscripcion;
 use App\Models\Estudiante;

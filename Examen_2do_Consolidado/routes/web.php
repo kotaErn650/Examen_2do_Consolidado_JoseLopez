@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route ::put ('estudiantes.update',[EstudianteController::class, 'update'])->name('estudiantes.update');
     Route ::get('estudiantes.show',[EstudianteController::class, 'show'])->name('estudiantes.show');
     
+    Route ::get('estudiantes.cursos',[EstudianteController::class, 'showCursos'])->name('estudiantes.cursos');
     
 
     Route ::get ('cursos.index',[CursoController::class, 'index'])->name('cursos.index');

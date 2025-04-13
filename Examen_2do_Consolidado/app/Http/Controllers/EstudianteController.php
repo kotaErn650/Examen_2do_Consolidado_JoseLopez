@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EstudianteRequest;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\Curso;
@@ -28,6 +29,7 @@ class EstudianteController extends Controller
      */
     public function create()
     {
+
         return view('estudiantes.create');
     }
 
@@ -39,18 +41,22 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre'=>'required|string|max:255',
-            'apellido'=>'required|string|max:255',
-            'fecha_nacimiento'=>'required|date',
-            'email'=>'required|string|email|unique:estudiantes,email',
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'fecha_nacimiento' => 'required|date',
+            'email' => 'required|string|email|unique:estudiantes,email',
         ]);
 
-
-        Estudiante::create($rerquest->all());
+        $estudiante = new Estudiante();
+        $estudiante->nombre = $validated['nombre'];
+        $estudiante->apellido = $validated['apellido'];
+        $estudiante->fecha_nacimiento = $validated['fecha_nacimiento'];
+        $estudiante->email = $validated['email'];
+        $estudiante->save();
 
         return redirect()->route('estudiantes.index')
-        ->with('success', 'Estudiante creado exitosamente.');
+            ->with('success', 'Estudiante creado exitosamente.');
     }
 
     /**
@@ -84,7 +90,7 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, Estudiante $estudiante)
     {
-        request->validate([
+        $request->validate([
             'nombre'=>'required|string|max:255',
             'apellido'=>'required|string|max:255',
             'fecha_nacimiento'=>'required|date',
