@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Inscripcion;
+use App\Models\Estudiante;
+use App\Models\Curso;
+use Illuminate\Support\Facades\DB;
 
 class InscripcionController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $inscripciones = Inscripcion::with(['estudiante', 'curso'])->get();
+        return view('inscripciones.index', compact('inscripciones'));
     }
 
     /**

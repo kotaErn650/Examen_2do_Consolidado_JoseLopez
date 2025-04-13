@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route ::get ('estudiantes/{estudiante}/cursos',[EstudianteController::class, 'showCursos'])->name('estidnates.cursos');
 
     Route ::get ('cursos/{curso}/estudiantes',[CursoController::class, 'showEstudiantes'])->name('cursos.estudiantes');
+    Route ::get ('estudiantes.index',[EstudianteController::class, 'index'])->name('estudiantes.index');
 
 });
 
