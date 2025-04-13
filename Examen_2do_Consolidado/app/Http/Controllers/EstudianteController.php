@@ -21,49 +21,100 @@ class EstudianteController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * @return \Illuminate\Http\Response
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
-        //
+        return view('estudiantes.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre'=>'required|string|max:255',
+            'apellido'=>'required|string|max:255',
+            'fecha_nacimiento'=>'required|date',
+            'email'=>'required|string|email|unique:estudiantes,email',
+        ]);
+
+
+        Estudiante::create($rerquest->all());
+
+        return redirect()->route('estudiantes.index')
+        ->with('success', 'Estudiante creado exitosamente.');
     }
 
     /**
      * Display the specified resource.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show(Estudiante $estudiante)
     {
-        //
+        return view('estudiantes.show', compact('estudiante'));
+
     }
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit(Estudiante $estudiante)
     {
-        //
+        return view('estudiantes.edit', compact('estudiante'));
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Estudiante $estudiante
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Estudiante $estudiante)
     {
-        //
+        request->validate([
+            'nombre'=>'required|string|max:255',
+            'apellido'=>'required|string|max:255',
+            'fecha_nacimiento'=>'required|date',
+            'email'=>'required|string|email|unique:estudiantes,email,'.$estudiante->id,
+        ]);
+
+        $estudiante->update($request->all());
+
+        return redirect()->route('estudiantes.index')
+        ->with('success', 'Estudiante actualizado exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy(Estudiante $estudiante)
     {
-        //
+        $estudiante->delete();
+
+        return redirect()->route('estudiantes.index')
+        ->with('success', 'Estudiante eliminado exitosamente.');
     }
+
+    public function showCursos(Estudiante $estudiante)
+    {
+        $cursos = $estudiante->cursos()->paginate(10);
+        return view('estudiantes.cursos', compact('estudiante', 'cursos'));
+    }
+
 }
