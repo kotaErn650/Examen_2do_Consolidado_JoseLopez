@@ -28,28 +28,27 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between mb-4">
-                        <a href="{{ route('inscripciones.create') }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
+                        <a href="{{ route('inscripciones.create') }}" class="btn btn-info hover:bg-blue-700 font-bold py-2 px-4 rounded">
                             Crear Inscripción
                         </a>
                     </div>
 
                     @if (session('success'))
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estudiante</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Curso</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha Inscripción</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
-                                </tr>
-                            </thead>
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Estudiante</th>
+                    <th>Curso</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($inscripciones as $inscripcion)
                                 <tr>
@@ -57,15 +56,16 @@
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $inscripcion->estudiante->nombre }} {{ $inscripcion->estudiante->apellido }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $inscripcion->curso->nombre }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $inscripcion->fecha_inscripcion }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('inscripciones.show', $inscripcion->id) }}" class="text-blue-600 hover:text-blue-900 mr-2">Ver</a>
-                                        <a href="{{ route('inscripciones.edit', $inscripcion->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-2">Editar</a>
-                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline">
+                                    <<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="{{ route('inscripciones.show', $inscripcion->id) }}" class="btn btn-info text-blue-600 hover:text-blue-900 mr-2">👁️ Ver</a>
+                                        <a href="{{ route('inscripciones.edit', $inscripcion->id) }}" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mr-2">🖋️ Editar</a>
+                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta inscripción?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                                            <button type="submit" class="btn btn-sm btn-danger text-white hover:text-yellow-500">🗑️ Eliminar</button>
                                         </form>
                                     </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -41,6 +41,13 @@ Route::middleware('auth')->group(function () {
     Route ::get ('cursos/{curso}/estudiantes',[CursoController::class, 'showEstudiantes'])->name('cursos.estudiantes');
     Route::get('cursos/{curso}', [CursoController::class, 'show'])->name('cursos.show');
 
+    Route ::resource('inscripciones', InscripcionController::class);
+    Route::put('inscripciones/{inscripcion}', [InscripcionController::class, 'update'])->name('inscripciones.update');
+    Route::resource('inscripciones', InscripcionController::class)->parameters(['inscripciones' => 'inscripcion']);
+
+    Route::resource('inscripciones', InscripcionController::class);
+    Route::put('inscripciones/{id}', [InscripcionController::class, 'update'])->name('inscripciones.update');
+
     
 
 });

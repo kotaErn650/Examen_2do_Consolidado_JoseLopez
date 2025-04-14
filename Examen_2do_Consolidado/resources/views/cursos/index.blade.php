@@ -71,7 +71,6 @@
                                         {{ $curso->duracion }} horas
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('cursos.show', $curso->id) }}" class="btn btn-info text-blue-600 hover:text-blue-900 mr-2">Ver</a>
                                         <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mr-2">Editar</a>
                                         <a href="{{ route('cursos.estudiantes', $curso->id) }}" class="btn btn-success bg-green-500 hover:text-green-900 mr-2">Estudiantes</a>
                                         <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este curso?');">

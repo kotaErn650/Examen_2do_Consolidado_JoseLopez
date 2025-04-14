@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InscripcionRequest;
 use Illuminate\Http\Request;
 use App\Models\Inscripcion;
 use App\Models\Estudiante;
 use App\Models\Curso;
-use Illuminate\Support\Facades\DB;
 
 class InscripcionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * 
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $inscripciones = Inscripcion::with(['estudiante', 'curso'])->get();
         return view('inscripciones.index', compact('inscripciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $estudiantes = Estudiante::all();
@@ -32,46 +22,44 @@ class InscripcionController extends Controller
         return view('inscripciones.create', compact('estudiantes', 'cursos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'estudiante_id' => 'required|exists:estudiantes,id',
             'curso_id' => 'required|exists:cursos,id',
+            'fecha_inscripcion' => 'nullable|date',
         ]);
-        //verifico si ya existe
+
         $existe = Inscripcion::where('estudiante_id', $request->estudiante_id)
             ->where('curso_id', $request->curso_id)
             ->exists();
+
         if ($existe) {
-                    return back()->with('error', 'El estudiante ya está inscrito en este curso.');
-                    } 
+            return back()->with('error', 'El estudiante ya está inscrito en este curso.');
+        }
+
+        $data = $request->all();
+        $data['fecha_inscripcion'] = $request->fecha_inscripcion ?: now();
+
+        Inscripcion::create($data);
+
+        return redirect()->route('inscripciones.index')
+            ->with('success', 'Inscripción creada exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Inscription $inscripcion)
+    public function show(Inscripcion $inscripcion)
     {
-        $inscripcion = Inscripcion::with(['estudiante', 'curso'])->findOrFail($id);
+        $inscripcion->load(['estudiante', 'curso']);
         return view('inscripciones.show', compact('inscripcion'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Inscription $inscription)
+    public function edit(Inscripcion $inscripcion)
     {
         $estudiantes = Estudiante::all();
         $cursos = Curso::all();
-        return view('inscripciones.edit', compact('estudiantes', 'estudiantes','cursos'));
+        return view('inscripciones.edit', compact('inscripcion', 'estudiantes', 'cursos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Inscripcion $inscripcion)
     {
         $request->validate([
@@ -79,25 +67,22 @@ class InscripcionController extends Controller
             'curso_id' => 'required|exists:cursos,id',
             'fecha_inscripcion' => 'required|date',
         ]);
-        //valido si existe
+
         $existe = Inscripcion::where('estudiante_id', $request->estudiante_id)
             ->where('curso_id', $request->curso_id)
             ->where('id', '!=', $inscripcion->id)
             ->exists();
-        
-        if ($existe){
+
+        if ($existe) {
             return back()->with('error', 'El estudiante ya está inscrito en este curso.');
         }
 
-        inscription->update($request->all());
-            return redirect()->route('inscripciones.index')
-            ->with('success', 'Inscripción actualizada correctamente.');
+        $inscripcion->update($request->all());
 
+        return redirect()->route('inscripciones.index')
+            ->with('success', 'Inscripción actualizada correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Inscripcion $inscripcion)
     {
         $inscripcion->delete();
