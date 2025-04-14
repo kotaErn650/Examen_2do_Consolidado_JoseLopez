@@ -65,20 +65,15 @@ class InscripcionController extends Controller
         $request->validate([
             'estudiante_id' => 'required|exists:estudiantes,id',
             'curso_id' => 'required|exists:cursos,id',
-            'fecha_inscripcion' => 'required|date',
+            'fecha_inscripcion' => 'nullable|date',
         ]);
-
-        $existe = Inscripcion::where('estudiante_id', $request->estudiante_id)
-            ->where('curso_id', $request->curso_id)
-            ->where('id', '!=', $inscripcion->id)
-            ->exists();
-
-        if ($existe) {
-            return back()->with('error', 'El estudiante ya está inscrito en este curso.');
-        }
-
-        $inscripcion->update($request->all());
-
+    
+        // Si no se proporciona una fecha de inscripción, usa la actual
+        $data = $request->all();
+        $data['fecha_inscripcion'] = $request->fecha_inscripcion ?: $inscripcion->fecha_inscripcion;
+    
+        $inscripcion->update($data);
+    
         return redirect()->route('inscripciones.index')
             ->with('success', 'Inscripción actualizada correctamente.');
     }

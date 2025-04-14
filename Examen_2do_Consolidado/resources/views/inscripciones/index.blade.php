@@ -58,7 +58,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $inscripcion->fecha_inscripcion }}</td>
                                     <<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <a href="{{ route('inscripciones.show', $inscripcion->id) }}" class="btn btn-info text-blue-600 hover:text-blue-900 mr-2">👁️ Ver</a>
-                                        <a href="{{ route('inscripciones.edit', $inscripcion->id) }}" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mr-2">🖋️ Editar</a>
+                                        <a href="{{ route('inscripciones.edit') }}" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mr-2">🖋️ Editar</a>
                                         <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta inscripción?');">
                                             @csrf
                                             @method('DELETE')
