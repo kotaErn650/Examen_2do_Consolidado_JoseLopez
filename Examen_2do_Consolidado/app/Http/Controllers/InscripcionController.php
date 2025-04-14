@@ -55,8 +55,10 @@ class InscripcionController extends Controller
 
     public function edit(Inscripcion $inscripcion)
     {
+        $inscripcion = Inscripcion::with(['estudiante', 'curso'])->findOrFail($id);
         $estudiantes = Estudiante::all();
         $cursos = Curso::all();
+    
         return view('inscripciones.edit', compact('inscripcion', 'estudiantes', 'cursos'));
     }
 

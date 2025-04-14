@@ -15,7 +15,7 @@
             </div>
         </nav>
 
-<x-app-layout>
+        <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Lista de Inscripciones') }}
@@ -34,21 +34,22 @@
                     </div>
 
                     @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Estudiante</th>
-                    <th>Curso</th>
-                    <th>Fecha</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estudiante</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Curso</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha Inscripción</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
+                                </tr>
+                            </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($inscripciones as $inscripcion)
                                 <tr>
@@ -58,7 +59,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $inscripcion->fecha_inscripcion }}</td>
                                     <<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <a href="{{ route('inscripciones.show', $inscripcion->id) }}" class="btn btn-info text-blue-600 hover:text-blue-900 mr-2">👁️ Ver</a>
-                                        <a href="{{ route('inscripciones.edit') }}" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mr-2">🖋️ Editar</a>
+                                        <a href="{{ route('inscripciones.edit', $inscripcion->id) }}" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mr-2">🖋️ Editar</a>
                                         <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta inscripción?');">
                                             @csrf
                                             @method('DELETE')
